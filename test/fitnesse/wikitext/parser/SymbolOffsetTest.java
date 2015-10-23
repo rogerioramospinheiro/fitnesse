@@ -55,7 +55,7 @@ public class SymbolOffsetTest {
             "-!| table |",
             "SymbolList<0..11>[" +
                     "Table<0..11>[TableRow<3..11>[" +
-                    "TableCell<3..11>[Text<3..10>]]]]");
+                    "TableCell<3..11>[Whitespace<3..4>, Text<4..9>, Whitespace<9..10>]]]]");
   }
 
   @Test
@@ -70,6 +70,18 @@ public class SymbolOffsetTest {
     assertParsesWithOffset(
             "# a comment",
             "SymbolList<0..11>[Comment<0..11>[Text<-1..-1>]]");
+  }
+
+  @Test
+  public void image() {
+    assertParsesWithOffset("!img-r http://files/fitnesse/images/symlinkDiagram.gif\n",
+            "SymbolList<0..55>[Image<0..54>[Link<7..14>[SymbolList<14..54>[Text<14..54>]]], Newline<54..55>]");
+  }
+
+  @Test
+  public void define() {
+    assertParsesWithOffset("!define TEST_SYSTEM {slim}\n",
+            "SymbolList<0..27>[Define<0..26>[Text<-1..-1>, Text<-1..-1>], Newline<26..27>]");
   }
 
   @Test

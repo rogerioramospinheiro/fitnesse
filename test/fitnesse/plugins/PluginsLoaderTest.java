@@ -24,7 +24,6 @@ import fitnesse.responders.editing.EditResponder;
 import fitnesse.testrunner.MultipleTestSystemFactory;
 import fitnesse.testrunner.TestSystemFactoryRegistry;
 import fitnesse.testrunner.WikiTestPage;
-import fitnesse.testrunner.WikiTestPageUtil;
 import fitnesse.testsystems.Descriptor;
 import fitnesse.testsystems.TestSystem;
 import fitnesse.testsystems.TestSystemFactory;
@@ -299,12 +298,13 @@ public class PluginsLoaderTest {
       p.propertyNames();
     }
 
+    @Override
     public boolean isContentAcceptable(String content, String page) {
       return false;
     }
   }
 
-  static public class DummyPlugin {
+  public static class DummyPlugin {
 
     public static void registerResponders(ResponderFactory factory) {
       factory.addResponder("custom1", WikiPageResponder.class);
@@ -316,7 +316,7 @@ public class PluginsLoaderTest {
     }
   }
 
-  static public class InstantiableDummyPlugin {
+  public static class InstantiableDummyPlugin {
 
     public final ComponentFactory componentFactory;
 
